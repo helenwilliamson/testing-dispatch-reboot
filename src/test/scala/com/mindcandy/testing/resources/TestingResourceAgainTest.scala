@@ -4,13 +4,13 @@ import util.{CodeAndBody, Served}
 import org.specs2.mutable.Specification
 import unfiltered.response.MethodNotAllowed
 
-class TestingResourceTest extends Specification with Served{
+class TestingResourceAgainTest extends Specification with Served{
 
   import dispatch._
 
   def setup = _.plan(new TestingResource)
 
-  "The project TestingResources" should {
+  "The project TestingResources again" should {
     "not serve POST" in {
       val svc = host() / "testing" << "something"
 

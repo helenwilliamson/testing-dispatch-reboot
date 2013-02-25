@@ -5,11 +5,12 @@ import dispatch.:/
 import unfiltered.netty.Http
 import org.specs2.mutable.Specification
 import org.specs2.specification.{Step, Fragments}
+import com.ning.http.client
 
 trait Served extends Specification {
 
   val port = Port.any
-  val host = :/("localhost", port)
+  def host() = :/("localhost", port)
 
   def setup: (Http => Http)
 
@@ -21,4 +22,8 @@ trait Served extends Specification {
 
   override def map(fs: => Fragments) = Step(start()) ^ fs ^ Step(stop())
 
+}
+
+object CodeAndBody extends (client.Response => (Int, String)) {
+  def apply(r: client.Response) = (r.getStatusCode, r.getResponseBody)
 }
